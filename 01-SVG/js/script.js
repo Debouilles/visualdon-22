@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function domForEach(selector, callback) {
     document.querySelectorAll(selector).forEach(callback);
     
@@ -13,6 +14,3 @@ if (document.getElementById(".rect2").fill = 'red') {
 else {
     document.getElementById(".rect2").fill = 'red';
 }
-
-
-
