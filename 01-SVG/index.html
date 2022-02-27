@@ -11,7 +11,7 @@
     <title>1-SVG</title>
   </head>
   <body>
-
+    
     <h1>Dessiner des formes</h1>
     <h2>Rectangle</h2>
     <svg width="700" height="200">
@@ -34,15 +34,23 @@
       <path d="M 10 10 V 60 H 40 M 10 10 H 40 V 60" fill="none" stroke="red" stroke-width="3px"></path>
       <path d="M 60 10 V 60 L90 60 M60 10 H90 M60 35 H 80" fill="none" stroke="red" stroke-width="3px"></path>       
       <path d="M110 10 V60 M110 10 c26.5,0 27,26.5 0,27 c27,0 27,26.5 0,26.5" fill="none" stroke="red" stroke-width="3px"></path>
-      
+
     </svg>
 
     <h1>Animer des formes</h1>
-
+    
     <h2>On click</h2>
-
+    <div class="dot" id="dot_01" onclick="dot_01()">
+    <svg width="700" height="200">
+      <rect  class="rect2" x="5" y="5" width="400px" height="100px" fill="red"></rect>
+      </svg>
+    </div>
     <h2>On hover</h2>
-
+    <div class="dot" id="dot_01" onclick="dot_01()">
+      <svg width="700" height="200">
+        <rect  class="rect2" x="5" y="5" width="400px" height="100px" fill="red"></rect>
+        </svg>
+      </div>
     <h2>Prenez la première lettre de votre prénom que vous avez créée ci-dessus. Faite bouger une forme de votre choix le long de la lettre</h2>
 
 
