@@ -1,5 +1,3 @@
-var turns = 0;
-
 const rectangles = document.querySelectorAll('.rectangle')
 
 rectangles.forEach(rectangle => {
