@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 function domForEach(selector, callback) {
     document.querySelectorAll(selector).forEach(callback);
     
