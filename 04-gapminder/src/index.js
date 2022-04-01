@@ -10,33 +10,33 @@ import * as d3 from 'd3'
 // console.log(life_expectancy);
 // console.log(income_per_person);
 
-// const popTransformed = population.map(d => {
-//     // Trouver le format SI (M, B, k)
-//     let SI = typeof d["2021"] === 'string' || d["2021"] instanceof String ? d["2021"].slice(-1) : d["2021"];
+const popTransformed = population.map(d => {
+    // Trouver le format SI (M, B, k)
+    let SI = typeof d["2021"] === 'string' || d["2021"] instanceof String ? d["2021"].slice(-1) : d["2021"];
     
-//     // Extraire la partie numérique
-//     let number = typeof d["2021"] === 'string' || d["2021"] instanceof String ? parseFloat(d["2021"].slice(0,-1)) : d["2021"];
+    // Extraire la partie numérique
+    let number = typeof d["2021"] === 'string' || d["2021"] instanceof String ? parseFloat(d["2021"].slice(0,-1)) : d["2021"];
     
-//    // Selon la valeur SI, multiplier par la puissance
-//     switch (SI) {
-//         case 'M': {
-//             return { "country": d.country, "pop": Math.pow(10, 6) * number};
-//             break;
-//         }
-//         case 'B': {
-//             return { "country": d.country, "pop": Math.pow(10, 9) * number};
-//             break;
-//         }
-//         case 'k': {
-//             return { "country": d.country, "pop": Math.pow(10, 3) * number};
-//             break;
-//         }
-//         default: {
-//             return { "country": d.country, "pop": number};
-//             break;
-//         }
-//     }
-// })
+   // Selon la valeur SI, multiplier par la puissance
+    switch (SI) {
+        case 'M': {
+            return { "country": d.country, "pop": Math.pow(10, 6) * number};
+            break;
+        }
+        case 'B': {
+            return { "country": d.country, "pop": Math.pow(10, 9) * number};
+            break;
+        }
+        case 'k': {
+            return { "country": d.country, "pop": Math.pow(10, 3) * number};
+            break;
+        }
+        default: {
+            return { "country": d.country, "pop": number};
+            break;
+        }
+    }
+})
 
 console.log(income_per_person[30].country);
 console.log(income_per_person[30]['2021']);
@@ -74,7 +74,7 @@ income_per_person.forEach(pays => {
 });
 
 // Add X axis
-let x = d3.scaleLinear()
+let x = d3.scaleSqrt()
     .domain([0, theBiggestGDP * 1.05])
     .range([0, width + 10]);
 svg.append("g")
@@ -116,9 +116,9 @@ population.forEach(pays => {
 });
 
 // Add a scale for bubble size
-let z = d3.scaleLinear()
-    .domain([200000, 1310000000])
-    .range([5, 60]);
+let z = d3.scaleSqrt()
+    .domain([0, 1350000000])
+    .range([0, 60]); //pixels
 
 // Add dots
 svg.append('g')
