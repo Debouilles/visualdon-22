@@ -117,8 +117,8 @@ population.forEach(pays => {
 
 // Add a scale for bubble size
 let z = d3.scaleSqrt()
-    .domain([0, 1350000000])
-    .range([0, 60]); //pixels
+    .domain([0, 1350000000]) //nombre max de population
+    .range([0, 60]); //pixels de l'écran
 
 // Add dots
 svg.append('g')
@@ -132,8 +132,8 @@ svg.append('g')
     .style("opacity", "0.7")
     .attr("stroke", "black")
 
-svg.selectAll("circle").data(life_expectancy).join()
-    .attr("cy", function (d) { return y(d["2021"]); })
+svg.selectAll("circle").data(income_per_person).join()
+    .attr("cx", function (d) { return x(d["2021"]); })
 
 svg.selectAll("circle").data(life_expectancy).join()
     .attr("cy", function (d) { return y(d["2021"]); })
@@ -217,5 +217,4 @@ let colorScale = d3.scaleThreshold()
         return colorScale(number);
       })
   })
-
 
