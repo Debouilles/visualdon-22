@@ -5,7 +5,7 @@ import * as d3 from 'd3'
  import life_expectancy from '../data/life_expectancy_years.csv'
  import income_per_person from '../data/income_per_person_gdppercapita_ppp_inflation_adjusted.csv'
 
-
+console.log(population);
 // console.log(population);
 // console.log(life_expectancy);
 // console.log(income_per_person);
@@ -38,10 +38,10 @@ const popTransformed = population.map(d => {
     }
 })
 
-console.log(income_per_person[30].country);
-console.log(income_per_person[30]['2021']);
-console.log(life_expectancy[30]['2021']);
-console.log(population[30]['2021']);
+// console.log(income_per_person[30].country);
+// console.log(income_per_person[30]['2021']);
+// console.log(life_expectancy[30]['2021']);
+// console.log(population[30]['2021']);
 
 d3.select("body")
     .append("div")
@@ -163,7 +163,7 @@ function strToInt(gdpAnneeCourante) {
 
 let listCountries = []
 
-expectancy.forEach(row => {
+life_expectancy.forEach(row => {
   let countryData = {};
   countryData[row['country']] = row['2021']
   listCountries.push(countryData)
@@ -218,3 +218,103 @@ let colorScale = d3.scaleThreshold()
       })
   })
 
+
+  const margin3 = { top: 10, right: 30, bottom: 20, left: 50 },
+  width2 = 2500 - margin2.left - margin2.right,
+  height2 = 700 - margin2.top - margin2.bottom;
+
+const svg2 = d3.select("my_dataviz2")
+.append("svg")
+  .attr("width", width2 + margin2.left + margin2.right)
+  .attr("height", height2 + margin2.top + margin2.bottom)
+.append("g")
+  .attr("transform",
+        "translate(" + margin2.left + "," + margin2.top + ")");
+
+
+
+// Map and projection
+const path2 = d3.geoPath();
+const projection2 = d3.geoMercator()
+  .scale(170)
+  .center([0,20])
+  .translate([width2 / 2, height2 / 2]);
+
+
+
+// Data and color scale
+
+const data2 = new Map();
+const colorScale2 = d3.scaleThreshold()
+  .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
+  .range(d3.schemeSet2);
+  //console.log(dataCountry)
+
+// Load external data and boot
+
+Promise.all([
+d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"),
+
+]).then(function(loadData){
+    let topo = loadData[0]
+    console.log(topo)
+
+    let mouseOver = function(d) {
+    d3.selectAll(".Country")
+      .transition()
+      .duration(200)
+      .style("opacity", .5)
+    d3.select(this)
+      .transition()
+      .duration(200)
+      .style("opacity", 1)
+      .style("stroke", "white")
+
+  }
+
+
+
+  let mouseLeave = function(d) {
+    d3.selectAll(".Country")
+      .transition()
+      .duration(200)
+      .style("opacity", .9)
+    d3.select(this)
+      .transition()
+      .duration(200)
+      .style("stroke", "transparent")
+  }
+
+
+
+  // Draw the map
+  svg2.append("g")
+    .selectAll("path")
+    .data(topo.features)
+    // .data(dataCountry)
+    .enter()
+    .append("path")
+      // draw each country
+      .attr("d", d3.geoPath()
+        .projection(projection)
+      )
+
+      // set the color of each country
+
+      .attr("fill", function (d) {
+        let populationCarte = pop[221].data.find(pop => pop.country == d.properties.name) || 0 
+        //console.log(populationCarte)
+        return colorScale(populationCarte.pop)
+
+      })
+
+      .style("stroke", "transparent")
+      .attr("class", function(d){ return "Country" } )
+      .style("opacity", .8)
+      .on("mouseover", mouseOver )
+      .on("mouseleave", mouseLeave )
+
+
+
+    });
+//afficherMap()
