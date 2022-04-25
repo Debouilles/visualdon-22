@@ -344,25 +344,6 @@ function stop() {
   nIntervId = null;
 }
 
-
-// function updateChart(data_iteration) {
-//   svg3.selectAll('circle')
-//       .data(data_iteration)
-//       .join(enter => enter.append('circle')
-//               .attr('cx', d => x(d.income))
-//               .attr('cy', d => y(d.life))
-//               .attr('r', 0)
-//               .transition(d3.transition()
-//                   .duration(500)
-//                   .ease(d3.easeLinear))
-//               .attr('r', d=> z(d.pop))
-//               .attr('fill', 'rgba(0,0,0,.5)')
-//           ,
-//           update => update.transition(d3.transition().duration(500).ease(d3.easeLinear))
-//                       .attr('cx', d => x(d.income))
-//                       .attr('cy', d => y(d.life)).attr('r', d=> z(d.pop)),
-//           exit => exit.remove())
-// }
 // Fonction de mise à jour du graphique
 function updateChart(dataiteration) {
   svg3.selectAll('circle')
