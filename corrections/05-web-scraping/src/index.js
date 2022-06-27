@@ -59,11 +59,12 @@ const ecommerce = async() => {
         const name = d.querySelector("a.title").textContent;
         const price = d.querySelector("h4.price").textContent;
         const rating = d.querySelectorAll("div.ratings p")[1].getAttribute("data-rating");
-
+        const description = d.querySelectorAll(".description").textContent;
         let newArray = [{
             "produit" : name,
             "prix": price,
-            "etoiles": rating
+            "etoiles": rating,
+            "description": description
         }]
         return newArray
     } );
